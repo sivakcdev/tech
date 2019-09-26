@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean packag'
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                echo 'test'
+                sh 'mvn test'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                sh 'scp -r /var/lib/jenkins/workspace/makers/target/*.jar root@two:/root/apache-tomcat-8.5.46/webapps'
             }
         }
     }
